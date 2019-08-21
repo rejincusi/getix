@@ -1,0 +1,38 @@
+.ticket-item {
+  width: 100% !important;
+}
+
+.ticket-item .MuiCard-root {
+  margin: 15px !important;
+  background-color: #ffe4e1 !important;
+}
+
+.risk-green {
+  color: green !important;
+  font-weight: bolder;
+}
+
+.risk-yellow {
+  color: #ffa826 !important;
+  font-weight: bolder;
+}
+
+.risk-red {
+  color: red !important;
+  font-weight: bolder;
+}
+
+.ticket-comment-form, 
+.ticket-comment-form .MuiTextField-root,
+.ticket-comment-form form  {
+  width: 100% !important;
+}
+
+.comment-item {
+  width: 100% !important;
+}
+
+.comment-item .MuiCard-root {
+  margin: 15px !important;
+  background-color: #ececec !important;
+}
