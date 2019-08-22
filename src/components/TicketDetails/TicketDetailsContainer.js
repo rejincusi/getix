@@ -12,8 +12,9 @@ export class TicketDetailsContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.loadTicket(Number(this.props.match.params.ticketId))
-    this.props.getComments(Number(this.props.match.params.ticketId))
+
+    // this.props.loadTicket(Number(this.props.match.params.ticketId))
+    // this.props.getComments(Number(this.props.match.params.ticketId))
     this.props.loadEvent(Number(this.props.match.params.id))
   }
 
@@ -22,7 +23,7 @@ export class TicketDetailsContainer extends Component {
     if (this.state.comment !== '') {
       const dataToSend = {
         comment: this.state.comment,
-        ticketId: this.props.ticket.id,
+        ticketId: this.props.match.params.ticketId,
         userId: this.props.user.id
       }
       this.props.createComment(dataToSend)
@@ -31,7 +32,7 @@ export class TicketDetailsContainer extends Component {
         errMessage: ''
       })
     } else {
-      this.setState({ errMessage: 'Please input a comment'})
+      this.setState({ errMessage: 'Please input a comment' })
     }
   }
 
@@ -42,16 +43,24 @@ export class TicketDetailsContainer extends Component {
   }
 
   render() {
-    return ( 
+    const ticket = this.props.tickets.find(ticket => { 
+        return parseInt(ticket.id) === parseInt(this.props.match.params.ticketId)
+    })
+    let comments = []
+    if (ticket) {
+      comments = ticket.comments
+    }
+
+    return (
       <TicketDetails
         event={this.props.event}
         user={this.props.user}
-        ticket={this.props.ticket}
-        comments={this.props.comments}
-        handleSubmit={this.handleSubmit} 
+        ticket={ticket}
+        comments={comments}
+        handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
         values={this.state}
-        />
+      />
     )
   }
 }
@@ -59,8 +68,7 @@ export class TicketDetailsContainer extends Component {
 const mapStateToProps = (state) => ({
   event: state.event,
   user: state.user,
-  ticket: state.ticket,
-  comments: state.comments
+  tickets: state.tickets,
 })
 
 const mapDispatchToProps = {

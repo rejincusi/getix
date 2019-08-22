@@ -11,12 +11,18 @@ class TicketEditFormContainer extends Component {
     errMessage: ''
   }
 
+  getTicketDetails = async (id) => {
+    await this.props.loadTicket(Number(id))
+    return true
+  }
+
   componentDidMount() {
-    this.props.loadTicket(Number(this.props.match.params.ticketId))
-    this.setState({
-      price: this.props.ticket.price,
-      description: this.props.ticket.description,
-      quantity: this.props.ticket.quantity
+    this.getTicketDetails(this.props.match.params.ticketId).then(() => {
+      this.setState({
+        price: this.props.ticket.price,
+        description: this.props.ticket.description,
+        quantity: this.props.ticket.quantity
+      })  
     })
   }
 

@@ -7,26 +7,26 @@ export const TICKET_FETCHED = 'TICKET_FETCHED'
 export const TICKET_UPDATE_SUCCESS = 'TICKET_UPDATE_SUCCESS'
 
 
-function allTickets(payload) {
+export function allTickets(payload) {
 	return {
 		type: ALL_TICKETS,
 		payload
 	}
 }
 
-function ticketUpdateSuccess(payload) {
-	return {
-		type: TICKET_UPDATE_SUCCESS,
-		payload
-	}
-}
+// function ticketUpdateSuccess(payload) {
+// 	return {
+// 		type: TICKET_UPDATE_SUCCESS,
+// 		payload
+// 	}
+// }
 
-function newTicket(payload) {
-	return {
-		type: NEW_TICKET,
-		payload
-	}
-}
+// function newTicket(payload) {
+// 	return {
+// 		type: NEW_TICKET,
+// 		payload
+// 	}
+// }
 
 function ticketFetched(payload) {
 	return {
@@ -35,13 +35,13 @@ function ticketFetched(payload) {
 	}
 }
 
-
-export const getTickets = (id) => (dispatch, getState) => {
+// to get all tickets
+export const getTickets = (id) => async (dispatch, getState) => {
 	const state = getState()
 	const { tickets } = state
 
 	if (!tickets.length) {
-		request(`${serverUrl}/events/${id}/tickets`)
+		await request(`${serverUrl}/events/${id}/tickets`)
 			.then(response => {
 				const action = allTickets(response.body)
 
@@ -51,43 +51,43 @@ export const getTickets = (id) => (dispatch, getState) => {
 	}
 }
 
-export const createTicket = (data) => (dispatch, getState) => {
+// to make single ticket
+export const createTicket = (data) => async (dispatch, getState) => {
 	const state = getState()
 	const { user } = state
 
-	request
+	await request
 		.post(`${serverUrl}/tickets`)
 		.set('Authorization', `Bearer ${user.jwt}`)
 		.send(data)
 		.then(response => {
-			const action = newTicket(response.body)
+			// const action = newTicket(response.body)
 
-			dispatch(action)
+			// dispatch(action)
 		})
 		.catch(console.error)
 }
 
-export const loadTicket = (id) => (dispatch, getState) => {
-	const state = getState().ticket
-	if (state && state.id === id) return
-
-	request(`${serverUrl}/tickets/${id}`)
+// to read single ticket detail
+export const loadTicket = (id) => async (dispatch, getState) => {
+	await request(`${serverUrl}/tickets/${id}`)
 		.then(response => {
 			dispatch(ticketFetched(response.body))
 		})
 		.catch(console.error)
 }
 
-export const updateTicket = (id, data) => (dispatch, getState) => {
+// call to edit ticket
+export const updateTicket = (id, data) => async (dispatch, getState) => {
 	const state = getState()
 	const { user } = state
 
-	request
+	await	request
 		.put(`${serverUrl}/tickets/${id}`)
 		.set('Authorization', `Bearer ${user.jwt}`)
 		.send(data)
 		.then(response => {
-			dispatch(ticketUpdateSuccess(response.body))
+			// dispatch(ticketUpdateSuccess(response.body))
 		})
 		.catch(console.error)
 }

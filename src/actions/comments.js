@@ -12,17 +12,16 @@ function allComments(payload) {
 	}
 }
 
-function newComment(payload) {
-	return {
-		type: NEW_COMMENT,
-		payload
-	}
-}
+// function newComment(payload) {
+// 	return {
+// 		type: NEW_COMMENT,
+// 		payload
+// 	}
+// }
 
-
-export const getComments = (id) => (dispatch) => {
-
-	request(`${serverUrl}/tickets/${id}/comments`)
+// to read all comments of a ticket
+export const getComments = (id) => async (dispatch) => {
+	await request(`${serverUrl}/tickets/${id}/comments`)
 		.then(response => {
 			const action = allComments(response.body)
 
@@ -31,18 +30,20 @@ export const getComments = (id) => (dispatch) => {
 		.catch(console.error)
 }
 
-export const createComment = (data) => (dispatch, getState) => {
+
+// to post a new comment on the ticket
+export const createComment = (data) => async (dispatch, getState) => {
 	const state = getState()
 	const { user } = state
 
-	request
+	await request
 		.post(`${serverUrl}/comments`)
 		.set('Authorization', `Bearer ${user.jwt}`)
 		.send(data)
 		.then(response => {
-			const action = newComment(response.body)
+			// const action = newComment(response.body)
 
-			dispatch(action)
+			// dispatch(action)
 		})
 		.catch(console.error)
 }

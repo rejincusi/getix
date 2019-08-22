@@ -26,13 +26,13 @@ function eventFetched(payload) {
 	}
 }
 
-
-export const getEvents = () => (dispatch, getState) => {
+// to read all the events
+export const getEvents = () => async (dispatch, getState) => {
 	const state = getState()
 	const { events } = state
 
 	if (!events.length) {
-		request(`${serverUrl}/events`)
+		await request(`${serverUrl}/events`)
 			.then(response => {
 				const action = allEvents(response.body)
 
@@ -40,13 +40,14 @@ export const getEvents = () => (dispatch, getState) => {
 			})
 			.catch(console.error)
 	}
-}
+}	
 
-export const createEvent = (data) => (dispatch, getState) => {
+// to create a new event
+export const createEvent = (data) => async (dispatch, getState) => {
 	const state = getState()
 	const { user } = state
 
-	request
+	await request
 		.post(`${serverUrl}/events`)
 		.set('Authorization', `Bearer ${user.jwt}`)
 		.send(data)
@@ -58,11 +59,11 @@ export const createEvent = (data) => (dispatch, getState) => {
 		.catch(console.error)
 }
 
-export const loadEvent = (id) => (dispatch, getState) => {
-	const state = getState().event
-	if (state && state.id === id) return
 
-	request(`${serverUrl}/events/${id}`)
+// to read an event wh
+export const loadEvent = (id) => async (dispatch, getState) => {
+
+	await request(`${serverUrl}/events/${id}`)
 		.then(response => {
 			dispatch(eventFetched(response.body))
 		})

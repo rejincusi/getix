@@ -15,7 +15,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CardHeader from '@material-ui/core/CardHeader';
 
 function EventsDetails(props) {
-  if (!props.event) return 'Loading event data...'
+  console.log("event detail props:",props)
+  if (!props.event || !props.tickets) return 'Loading event data...'
 
   return (
     <Container maxWidth="md">

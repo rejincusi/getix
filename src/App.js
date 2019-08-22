@@ -11,6 +11,8 @@ import EventListContainer from './components/EventList/EventListContainer'
 import '../src/App.css';
 import { createBrowserHistory } from 'history'
 import { connect } from 'react-redux'
+import { serverUrl } from './serverUrl'
+import { allTickets } from './actions/tickets'
 import EventFormContainer from './components/EventForm/EventFormContainer';
 import EventDetailsContainer from './components/EventDetails/EventDetailsContainer';
 import TicketFormContainer from './components/TicketForm/TicketFormContainer';
@@ -20,6 +22,16 @@ import TicketEditFormContainer from './components/TicketEditForm/TicketEditFormC
 export const history = createBrowserHistory({forceRefresh:true})
 
 class App extends Component {
+  source = new EventSource(`${serverUrl}/stream`)
+
+  componentDidMount() {
+    this.source.onmessage = event => {
+      console.log("eventssststststs:",JSON.parse(event.data))
+      const tickets = JSON.parse(event.data);
+      this.props.allTickets(tickets);
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -35,16 +47,16 @@ class App extends Component {
               { this.props.user.jwt ? (
                 <Grid item>
                   <Link to="/">
-                    <Button color="inherit">Logout</Button>
+                    <Button color="inherit" className="account-user-btn">Logout</Button>
                   </Link>
                 </Grid>
               ) : (
                 <Grid item>
                   <Link to="/login">
-                    <Button color="inherit">Login</Button>
+                    <Button variant="outlined" className="account-user-btn">Login</Button>
                   </Link>
                   <Link to="/signup">
-                    <Button color="inherit">Signup</Button>
+                    <Button color="inherit" className="account-user-btn">Signup</Button>
                   </Link>
                 </Grid>
               )}
@@ -67,8 +79,12 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    user:state.user
+    user: state.user
   }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = {
+  allTickets
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

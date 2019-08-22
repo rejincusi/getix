@@ -17,11 +17,14 @@ import { Link } from "react-router-dom"
 function TicketDetails(props) {
   if (!props.event || !props.ticket) return 'Loading ticket data...'
   let riskClassName = 'risk-green'
-  if (props.ticket.risks > 35 && props.ticket.risks < 65) {
+  if (props.ticket) {
+    if (props.ticket.risk > 35 && props.ticket.risk < 65) {
     riskClassName = 'risk-yellow'
-  } else if (props.ticket.risks > 65 ) {
+    } else if (props.ticket.risk > 65 ) {
     riskClassName = 'risk-red'
+    }
   }
+  
 
   return (
     <Container maxWidth="md">
@@ -55,7 +58,7 @@ function TicketDetails(props) {
                 <Typography gutterBottom paragraph={true}>
                   We calculated that the risk of this ticket being fraud is &nbsp;
                   <span className={riskClassName}>
-                    {props.ticket.risks.toFixed(2)}%
+                   {props.ticket ? props.ticket.risk.toFixed(2) : 5}%
                   </span>
                 </Typography>
               </CardContent>

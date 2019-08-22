@@ -18,8 +18,10 @@ function loginSuccess(payload) {
   }
 }
 
-export const signup = (email, password, name, imageUrl) => dispatch => {
-  request
+
+// to create new user
+export const signup = (email, password, name, imageUrl) => async dispatch => {
+  await request
     .post(`${serverUrl}/users`)
     .send({ email, password, name, imageUrl })
     .then(response => {
@@ -36,8 +38,10 @@ export const signup = (email, password, name, imageUrl) => dispatch => {
     })
 }
 
-export const login = (email, password) => dispatch => {
-  request
+
+// to login the new created account
+export const login = (email, password) => async dispatch => {
+  await request
     .post(`${serverUrl}/login`)
     .send({ email, password })
     .then(response => {
