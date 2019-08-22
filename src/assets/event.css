@@ -17,8 +17,13 @@
   -o-background-size: cover;
   background-size: cover;
   background-position: bottom;
-  min-height: 300px;
+  min-height: 400px;
   color: white;
+}
+
+.search-container .MuiGrid-item{
+  text-align: center !important;
+  color: #373434 !important;
 }
 
 .event-list {

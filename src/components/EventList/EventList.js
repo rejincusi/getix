@@ -21,9 +21,9 @@ function EventList (props) {
   return <div>
     <Container maxWidth="md">
       <Grid container alignItems="center" justify="center" direction="column" spacing={10} className="search-container">
-        <Grid item xs={12} lg={6}>
+        <Grid item xs={12} lg={8} alignItems="center" justify="center">
           <Typography variant="h4">
-            Grab your tickets!
+            GeTix-CLUSIVE TICKETS!
           </Typography>
           <TextField
             id="searchEvent"

@@ -15,7 +15,6 @@ import IconButton from '@material-ui/core/IconButton';
 import CardHeader from '@material-ui/core/CardHeader';
 
 function EventsDetails(props) {
-  console.log("event detail props:",props)
   if (!props.event || !props.tickets) return 'Loading event data...'
 
   return (
@@ -101,7 +100,7 @@ function EventsDetails(props) {
                       <div/>
                     )
                   }
-                  title={`Seller name: ${ticket.user.name}`}
+                  title={`${ticket.description}`}
                   subheader={`${ticket.quantity}x € ${ticket.price}`}
                 />
               </Card>

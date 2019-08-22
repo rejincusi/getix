@@ -12,9 +12,6 @@ export class TicketDetailsContainer extends Component {
   }
 
   componentDidMount() {
-
-    // this.props.loadTicket(Number(this.props.match.params.ticketId))
-    // this.props.getComments(Number(this.props.match.params.ticketId))
     this.props.loadEvent(Number(this.props.match.params.id))
   }
 

@@ -1,1 +1,1 @@
-export const serverUrl = "http://localhost:5000" || "https://stormy-depths-47279.herokuapp.com"
+export const serverUrl = "https://stormy-depths-47279.herokuapp.com" || "http://localhost:5000" 

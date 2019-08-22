@@ -10,11 +10,15 @@ export class EventDetailsContainer extends Component {
   }
 
   render() {
+    const eventId =  this.props.match.params.id 
+    const tickets = this.props.tickets.filter(ticket => ticket.eventId === Number(eventId))
+    console.log("tickettt:", tickets)
+    
     return (
       <EventDetails
         event={this.props.event}
         user={this.props.user}
-        tickets={this.props.tickets}
+        tickets={tickets}
       />
     )
   }
