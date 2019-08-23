@@ -35,7 +35,6 @@ class App extends Component {
   render() {
     return (
       <Router>
-        {/* navbar here */} 
         <AppBar position="fixed" className="nav-menu">
           <Toolbar>
             <Grid justify="space-between" container>

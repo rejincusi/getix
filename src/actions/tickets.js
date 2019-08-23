@@ -14,20 +14,6 @@ export function allTickets(payload) {
 	}
 }
 
-// function ticketUpdateSuccess(payload) {
-// 	return {
-// 		type: TICKET_UPDATE_SUCCESS,
-// 		payload
-// 	}
-// }
-
-// function newTicket(payload) {
-// 	return {
-// 		type: NEW_TICKET,
-// 		payload
-// 	}
-// }
-
 function ticketFetched(payload) {
 	return {
 		type: TICKET_FETCHED,
@@ -61,9 +47,6 @@ export const createTicket = (data) => async (dispatch, getState) => {
 		.set('Authorization', `Bearer ${user.jwt}`)
 		.send(data)
 		.then(response => {
-			// const action = newTicket(response.body)
-
-			// dispatch(action)
 		})
 		.catch(console.error)
 }
@@ -87,7 +70,6 @@ export const updateTicket = (id, data) => async (dispatch, getState) => {
 		.set('Authorization', `Bearer ${user.jwt}`)
 		.send(data)
 		.then(response => {
-			// dispatch(ticketUpdateSuccess(response.body))
 		})
 		.catch(console.error)
 }

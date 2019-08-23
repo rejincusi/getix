@@ -12,13 +12,6 @@ function allComments(payload) {
 	}
 }
 
-// function newComment(payload) {
-// 	return {
-// 		type: NEW_COMMENT,
-// 		payload
-// 	}
-// }
-
 // to read all comments of a ticket
 export const getComments = (id) => async (dispatch) => {
 	await request(`${serverUrl}/tickets/${id}/comments`)
@@ -41,9 +34,6 @@ export const createComment = (data) => async (dispatch, getState) => {
 		.set('Authorization', `Bearer ${user.jwt}`)
 		.send(data)
 		.then(response => {
-			// const action = newComment(response.body)
-
-			// dispatch(action)
 		})
 		.catch(console.error)
 }

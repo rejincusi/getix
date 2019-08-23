@@ -60,7 +60,7 @@ export const createEvent = (data) => async (dispatch, getState) => {
 }
 
 
-// to read an event wh
+// to read an event 
 export const loadEvent = (id) => async (dispatch, getState) => {
 
 	await request(`${serverUrl}/events/${id}`)
