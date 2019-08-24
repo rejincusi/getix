@@ -49,7 +49,7 @@ function EventsDetails(props) {
         </Grid>
 
         <Grid item xs={12} md={8} sm={6} lg={8}>
-          { props.user.jwt ? (
+          { props.user ? (
             <Grid className="add-btn-con" item xs={12} lg={12}>
               <Link to={`/event-ticket/${props.event.id}/new-ticket`}>
                 <Button fullWidth={true} className="add-btn" variant="contained" size="large" color="primary">

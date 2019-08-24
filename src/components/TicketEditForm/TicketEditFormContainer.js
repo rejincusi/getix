@@ -67,7 +67,7 @@ class TicketEditFormContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
+    user: JSON.parse(localStorage.getItem('user')),
     ticket: state.ticket
   }
 }

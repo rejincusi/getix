@@ -97,7 +97,7 @@ function EventForm(props) {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-          { props.user.jwt ? (
+          { props.user ? (
             <Button type="submit" variant="contained" color="primary">
               Submit
             </Button>

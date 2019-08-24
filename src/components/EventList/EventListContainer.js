@@ -18,7 +18,7 @@ class EventListContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     events: state.events,
-    user:state.user
+    user: JSON.parse(localStorage.getItem('user'))
   }
 }
 

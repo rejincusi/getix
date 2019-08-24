@@ -52,7 +52,7 @@ class TicketFormContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    user:state.user
+    user: JSON.parse(localStorage.getItem('user'))
   }
 }
 

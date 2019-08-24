@@ -10,7 +10,7 @@ import '../../assets/login.css'
 function LogInForm (props) {
   return (
     <div>
-      {props.user.jwt && <Redirect to={'/'}></Redirect>}
+      {props.user && <Redirect to={'/'}></Redirect>}
       <form onSubmit={props.handleSubmit}>
         <Grid container alignItems="center" justify="center" direction="column" className="login-container">
           <Grid item xs={12}>

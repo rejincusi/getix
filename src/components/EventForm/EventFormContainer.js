@@ -60,7 +60,7 @@ class EventFormContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    user:state.user
+    user: JSON.parse(localStorage.getItem('user'))
   }
 }
 

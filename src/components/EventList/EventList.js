@@ -38,7 +38,7 @@ function EventList (props) {
           </Button>
         </Grid>
         
-        { props.user.jwt ? (
+        { props.user ? (
           <Grid className="add-btn-con" item xs={12} lg={6}>
             <Link to="/new-event">
               <Button className="add-btn" variant="contained" size="large" color="primary">

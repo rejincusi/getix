@@ -97,7 +97,7 @@ function TicketDetails(props) {
         )}
 
         <Grid item xs={12} md={8} sm={6} lg={8} className="ticket-comment-form">
-        { props.user.jwt ? ( 
+        { props.user ? ( 
           <form onSubmit={props.handleSubmit}>
             <TextField
               id="comment"

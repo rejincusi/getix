@@ -19,17 +19,22 @@ import TicketFormContainer from './components/TicketForm/TicketFormContainer';
 import TicketDetailsContainer from './components/TicketDetails/TicketDetailsContainer';
 import TicketEditFormContainer from './components/TicketEditForm/TicketEditFormContainer';
 
-export const history = createBrowserHistory({forceRefresh:true})
+export const history = createBrowserHistory({ forceRefresh: true })
 
 class App extends Component {
   source = new EventSource(`${serverUrl}/stream`)
 
   componentDidMount() {
+    console.log(localStorage.getItem('user'))
     this.source.onmessage = event => {
-      console.log("eventssststststs:",JSON.parse(event.data))
       const tickets = JSON.parse(event.data);
       this.props.allTickets(tickets);
     }
+  }
+
+  handleLogOut = () => {
+    localStorage.removeItem('user')
+    history.push('/')
   }
 
   render() {
@@ -43,42 +48,40 @@ class App extends Component {
                   <Link to="/">GeTix</Link>
                 </Typography>
               </Grid>
-              { this.props.user.jwt ? (
+              {this.props.user ? (
                 <Grid item>
-                  <Link to="/">
-                    <Button color="inherit" className="account-user-btn">Logout</Button>
-                  </Link>
+                  <Button onClick={this.handleLogOut} color="inherit" className="account-user-btn">Logout</Button>
                 </Grid>
               ) : (
-                <Grid item>
-                  <Link to="/login">
-                    <Button variant="outlined" className="account-user-btn">Login</Button>
-                  </Link>
-                  <Link to="/signup">
-                    <Button color="inherit" className="account-user-btn">Signup</Button>
-                  </Link>
-                </Grid>
-              )}
+                  <Grid item>
+                    <Link to="/login">
+                      <Button variant="outlined" className="account-user-btn">Login</Button>
+                    </Link>
+                    <Link to="/signup">
+                      <Button color="inherit" className="account-user-btn">Signup</Button>
+                    </Link>
+                  </Grid>
+                )}
             </Grid>
           </Toolbar>
         </AppBar>
 
         <Route exact path="/" component={EventListContainer} />
-        <Route path ='/event/:id' component={EventDetailsContainer} />
+        <Route path='/event/:id' component={EventDetailsContainer} />
         <Route path="/login" component={LoginFormContainer} />
         <Route path="/signup" component={SignupFormContainer} />
         <Route path="/event-ticket/:id/new-ticket" component={TicketFormContainer} />
         <Route path="/event-detail/:id/ticket/:ticketId" component={TicketDetailsContainer} />
         <Route path="/event-edit-ticket/:id/ticket/:ticketId" component={TicketEditFormContainer} />
         <Route path="/new-event" component={EventFormContainer} />
-      </Router> 
+      </Router>
     )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: JSON.parse(localStorage.getItem('user'))
   }
 }
 

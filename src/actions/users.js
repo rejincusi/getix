@@ -24,8 +24,8 @@ export const signup = (email, password, name, imageUrl) => async dispatch => {
   await request
     .post(`${serverUrl}/users`)
     .send({ email, password, name, imageUrl })
-    .then(response => {
-      const action = signupSuccess(response.body)
+    .then(res => {
+      const action = signupSuccess(res.body)
 
       dispatch(action)
       history.push('/login')
@@ -44,8 +44,10 @@ export const login = (email, password) => async dispatch => {
   await request
     .post(`${serverUrl}/login`)
     .send({ email, password })
-    .then(response => {
-      const action = loginSuccess(response.body)
+    .then(res => {
+      const action = loginSuccess(res.body)
+
+      localStorage.setItem('user', JSON.stringify(res.body))
 
       dispatch(action)
     })

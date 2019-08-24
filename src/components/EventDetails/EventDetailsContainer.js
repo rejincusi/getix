@@ -26,7 +26,7 @@ export class EventDetailsContainer extends Component {
 
 const mapStateToProps = (state) => ({
   event: state.event,
-  user: state.user,
+  user: JSON.parse(localStorage.getItem('user')),
   tickets: state.tickets
 })
 
