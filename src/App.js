@@ -27,8 +27,8 @@ class App extends Component {
   componentDidMount() {
     console.log(localStorage.getItem('user'))
     this.source.onmessage = event => {
-      const tickets = JSON.parse(event.data);
-      this.props.allTickets(tickets);
+      const tickets = JSON.parse(event.data)
+      this.props.allTickets(tickets)
     }
   }
 

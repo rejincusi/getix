@@ -6,6 +6,7 @@ import EventDetails from './EventsDetails'
 export class EventDetailsContainer extends Component {
 
   componentDidMount() {
+    console.log("kahit ano lang")
     this.props.loadEvent(Number(this.props.match.params.id))
   }
 

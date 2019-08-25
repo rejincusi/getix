@@ -39,13 +39,13 @@ class LoginFormContainer extends React.Component {
   }
 }
 
-function MapStateToProps(state) {
+function mapStateToProps(state) {
   return {
     user: JSON.parse(localStorage.getItem('user'))
   };
 }
 
 export default connect(
-  MapStateToProps,
+  mapStateToProps,
   { login }
 )(LoginFormContainer);
