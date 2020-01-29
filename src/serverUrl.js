@@ -1,1 +1,1 @@
-export const serverUrl = "https://getix.herokuapp.com" || "http://localhost:5000"
+export const serverUrl = "https://getix-server.herokuapp.com" || "http://localhost:5000"
